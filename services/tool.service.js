@@ -38,11 +38,11 @@ static async createOne(body){
 }
 
 static async deleteOne(id){
-
     
         try{
           
-            const ToolDeleted  = await toolModel.destroy({where:{ToolId:id}})
+            const ToolDeleted  = await toolModel.destroy({where:{toolId: id}})
+           
             return ToolDeleted
         }catch(error){throw error}
     

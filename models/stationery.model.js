@@ -9,10 +9,14 @@ stationeryName: {type: DataTypes.STRING(25),unique:true, allowNull:false,field: 
 stationeryStock: {type: DataTypes.INTEGER(), allowNull: false, field: 'stationery_stock'},
 stationeryMaxOrder: {type: DataTypes.INTEGER(), allowNull: false, field: 'stationery_max_order'},
 stationeryMinOrder: {type: DataTypes.INTEGER(), allowNull: false, field: 'stationery_min_order'},
-stationeryLowStockAlert: {type: DataTypes.BOOLEAN(), allowNull: false, field: 'stationery_low_stock_alert'}
-
+stationeryLowStockAlert: {type: DataTypes.BOOLEAN(), defaultValue:false, field: 'stationery_low_stock_alert'},
+  newStationeryDate: {
+    type: DataTypes.DATE,
+    defaultValue: db.literal('CURRENT_TIMESTAMP'),
+    field: 'new_stationery_ate'
+  }
 },{
- timestamps: true, updatedAt: false, createdAt:'stationery_created' })
+ timestamps: false })
 
 
  module.exports = Stationery

@@ -18,13 +18,21 @@ class authServices {
 
 static async accessRequest(newRequest) {
     try {
+      console.log(newRequest)
 
-      const getEmployeeDates = await employeeModel.findByPk(newRequest.employeeId)
-      if(getEmployeeDates){
-        const newUser = await authorizationRequestModel.create(newRequest)
+      const getEmployeeDates = await employeeModel.findOne({ where: { employeeEmail: newRequest.email }})
+      if(!getEmployeeDates){console.log('user no exists')}
+      else{ 
+       const newAccess = {
+         employeeId: getEmployeeDates.employeeId,
+         documentId: newRequest.documentId,
+         password: newRequest.password,
+         role: newRequest.role
+        }
+        const newUser = await authorizationRequestModel.create(newAccess)
         
     const employee = await authorizationRequestModel.findOne({
-  where: { employeeId: newRequest.employeeId },
+  where: { employeeId: getEmployeeDates.employeeId },
   include: [
     {
       model: employeeModel,
@@ -39,14 +47,16 @@ const mailOptions = {
         to: "japay01@hotmail.com",
         subject: "Nueva solicitud de acceso",
         html: `
-          <h3>Se ha recibido una nueva solicitud de acceso</h3>
+          <h3>Se ha recibido una nueva solicitud de acceso :</h3>
           <p><strong>Nombre:</strong> ${employee.employee.employeeName}</p>
           <p><strong>Apellido:</strong> ${employee.employee.employeeLastName}</p>
-          <p><strong>Documento Empleado:</strong> ${newRequest.documentId}</p>
+          <p><strong>Documento del Empleado:</strong> ${newRequest.documentId}</p>
+          <p><strong>Cargo del Empleado:</strong> ${newRequest.role}</p>
+          <p><strong>Mensaje:</strong> ${newRequest.reason}</p>
           <p>¿Desea autorizar el registro de esta persona?</p>
           <p>
-            <a href="http://localhost:8000/api/auth/autorize/${newRequest.employeeId}" style="color:green">Autorizar</a> |
-            <a href="http://localhost:8000/api/auth/reject/${newRequest.employeeId}" style="color:red">Rechazar</a>
+            <a href="http://localhost:8000/api/auth/authorize/${getEmployeeDates.employeeId}" style="color:green">Autorizar</a> |
+            <a href="http://localhost:8000/api/auth/reject/${getEmployeeDates.employeeId}" style="color:red">Rechazar</a>
           </p>
         `,
       };
@@ -54,7 +64,7 @@ const mailOptions = {
       const info = await transporter.sendMail(mailOptions);
       console.log("Correo enviado: ", info.messageId);
 
-      }else{return console.log('no created')}
+    }
 
       
 

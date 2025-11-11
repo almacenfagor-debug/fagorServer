@@ -17,6 +17,11 @@ const Employee = db.define('employee', {
     type: DataTypes.STRING(25),
     allowNull: false,
     field: 'employee_lastname'
+  },
+   employeeEmail: {
+    type: DataTypes.STRING(50),
+    allowNull: false,
+    field: 'employee_email'
   }
 }, {
   tableName: 'employee',

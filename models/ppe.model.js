@@ -9,10 +9,15 @@ ppeName: {type: DataTypes.STRING(25),unique: true, allowNull:false,field: 'ppe_N
 ppeStock: {type: DataTypes.INTEGER(), allowNull: false, field: 'ppe_stock'},
 ppeMaxOrder: {type: DataTypes.INTEGER(), allowNull: false, field: 'ppe_max_order'},
 ppeMinOrder: {type: DataTypes.INTEGER(), allowNull: false, field: 'ppe_min_order'},
-ppeLowStockAlert: {type: DataTypes.BOOLEAN(), allowNull: false, field: 'ppe_low_stock_alert'}
+ppeLowStockAlert: {type: DataTypes.BOOLEAN(), defaultValue:false, field: 'ppe_low_stock_alert'},
+  newPpeDate: {
+    type: DataTypes.DATE,
+    defaultValue: db.literal('CURRENT_TIMESTAMP'),
+    field: 'new_ppe_date'
+  }
 
 },{
- timestamps: true, updatedAt: false, createdAt:'ppe_creation' })
+ timestamps: false })
 
 
  module.exports = Ppe

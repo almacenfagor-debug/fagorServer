@@ -9,10 +9,16 @@ supplyName: {type: DataTypes.STRING(25), allowNull:false,field: 'supply_name'},
 supplyStock: {type: DataTypes.INTEGER(), allowNull: false, field: 'supply_stock'},
 supplyMaxOrder: {type: DataTypes.INTEGER(), allowNull: false, field: 'supply_max_order'},
 supplyMinOrder: {type: DataTypes.INTEGER(), allowNull: false, field: 'supply_min_order'},
-supplyLowStockAlert: {type: DataTypes.BOOLEAN(), allowNull: false, field: 'supply_low_stock_alert'}
+supplyLowStockAlert: {type: DataTypes.BOOLEAN(), defaultValue: false, field: 'supply_low_stock_alert'},
+createdAt: {
+    type: DataTypes.DATE,
+    allowNull: false,
+    defaultValue: db.literal('CURRENT_TIMESTAMP'),
+    field: 'created_at'
+  }
 
 },{
- timestamps: true, updatedAt: false, createdAt:'supply_created_date' })
+ timestamps: false })
 
 
  module.exports = Supply

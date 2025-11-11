@@ -4,16 +4,17 @@ const authServices = require("../services/auth.service");
 const authorizationRequestModel = require('../models/authorization.request.model')
 
 const loginController = async (req, res, next) => {
-  const { documentId, password } = req.body;
+  const { documentId, passLogin } = req.body;
 
   try {
     const user = await authServices.getUser(documentId);
     if (!user) {
       return res.status(400).json({ message: "user doesnt exist in db" });
     }
+    console.log(req.body)
     if(user.dataValues.statusId !== 2){return res.status(400).json('User statusId is not authorized!!')}
-    const pass = await bcrypt.compare(password, user.dataValues.password)
-    if(!pass){return res.status(400).json({message: 'pass not match with user'})} 
+    const pass = await bcrypt.compare(passLogin, user.dataValues.password)
+        if(!pass){return res.status(400).json({message: 'pass not match with user'})} 
     
     const userIncludeDate = await authServices.loginIncludes(user.dataValues.employeeId)
     
@@ -76,7 +77,7 @@ const rejectController = async (req, res, next) => {
   try {
     const { employeeId } = req.params; 
 
-    // Buscar la solicitud en DB y crear usuario
+    // Buscar la solicitud en DB y eliminar usuario
     const requestEmployee = await authorizationRequestModel.findOne({ where: { employeeId } });
 
     if (!requestEmployee) {
