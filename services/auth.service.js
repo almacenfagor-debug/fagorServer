@@ -2,6 +2,8 @@ const jwt = require("jsonwebtoken");
 const employeeModel = require("../models/employee.model");
 const authorizationRequestModel = require("../models/authorization.request.model")
 const transporter = require("../utils/mailer");
+const { Resend } = require("resend");
+const resend = new Resend("re_PacLBpjV_5QK7UjBa7SRcZ3RUfoGb1Xwj");
 
 class authServices {
   static genToken(payload) {
@@ -50,24 +52,25 @@ if (!getEmployeeDates) {
 });*/
 
 
-const mailOptions = {
-        from: 'almacenfagor@gmail.com',
-        to: "japay01@hotmail.com",
-        subject: "Nueva solicitud de acceso",
-        html: `
-          <h3>Se ha recibido una nueva solicitud de acceso :</h3>
-          <p><strong>Nombre:</strong> ${employee.employee.employeeName}</p>
-          <p><strong>Apellido:</strong> ${employee.employee.employeeLastName}</p>
-          <p><strong>Documento del Empleado:</strong> ${newRequest.documentId}</p>
-          <p><strong>Cargo del Empleado:</strong> ${newRequest.role}</p>
-          <p><strong>Mensaje:</strong> ${newRequest.reason}</p>
-          <p>¿Desea autorizar el registro de esta persona?</p>
-          <p>
-            <a href="https://fagorserver.onrender.com/api/auth/authorize/${getEmployeeDates.employeeId}" style="color:green">Autorizar</a> |
-            <a href="https://fagorserver.onrender.com/api/auth/reject/${getEmployeeDates.employeeId}" style="color:red">Rechazar</a>
-          </p>
-        `,
-      };
+
+await resend.emails.send({
+  from: "Almacén Fagor <almacenfagor@resend.dev>",
+  to: "japay01@hotmail.com",
+  subject: "Nueva solicitud de acceso",
+  html: `
+    <h3>Se ha recibido una nueva solicitud de acceso :</h3>
+    <p><strong>Nombre:</strong> ${getEmployeeDates.employeeName}</p>
+    <p><strong>Apellido:</strong> ${getEmployeeDates.employeeLastName}</p>
+    <p><strong>Documento:</strong> ${newRequest.documentId}</p>
+    <p><strong>Cargo:</strong> ${newRequest.role}</p>
+    <p><strong>Motivo:</strong> ${newRequest.reason}</p>
+    <p>
+      <a href="https://fagorserver.onrender.com/api/auth/authorize/${getEmployeeDates.employeeId}" style="color:green">Autorizar</a> |
+      <a href="https://fagorserver.onrender.com/api/auth/reject/${getEmployeeDates.employeeId}" style="color:red">Rechazar</a>
+    </p>
+  `,
+});
+
 
       console.log("Preparando envío de correo...");
 const info = await transporter.sendMail(mailOptions);
