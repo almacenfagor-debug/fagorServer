@@ -1,4 +1,7 @@
 
+
+const nodemailer = require("nodemailer");
+
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
   port: 465,
@@ -8,9 +11,11 @@ const transporter = nodemailer.createTransport({
     pass: "lbnfidbsznhlbsqu",
   },
   logger: true,
-  debug: true, // 
+  debug: true, 
 });
 
+  
+ 
 
 module.exports = transporter;
 
