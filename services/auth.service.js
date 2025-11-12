@@ -48,16 +48,7 @@ const mailOptions = {
         subject: "Nueva solicitud de acceso",
         html: `
           <h3>Se ha recibido una nueva solicitud de acceso :</h3>
-          <p><strong>Nombre:</strong> ${employee.employee.employeeName}</p>
-          <p><strong>Apellido:</strong> ${employee.employee.employeeLastName}</p>
-          <p><strong>Documento del Empleado:</strong> ${newRequest.documentId}</p>
-          <p><strong>Cargo del Empleado:</strong> ${newRequest.role}</p>
-          <p><strong>Mensaje:</strong> ${newRequest.reason}</p>
-          <p>¿Desea autorizar el registro de esta persona?</p>
-          <p>
-            <a href="https://fagorserver.onrender.com/api/auth/authorize/${getEmployeeDates.employeeId}" style="color:green">Autorizar</a> |
-            <a href="https://fagorserver.onrender.com/api/auth/reject/${getEmployeeDates.employeeId}" style="color:red">Rechazar</a>
-          </p>
+          
         `,
       };
 
