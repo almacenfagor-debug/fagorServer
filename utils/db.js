@@ -9,8 +9,7 @@ const db = new Sequelize(process.env.EX_DATABASE_URL,{
   username: "postgres",
   password: "tqYdfvZhYWhVVojBrjwJBgxaaKyDYWxX",
   logging: false,
-
-  usuario: postgres
+  usuario: "postgres"
 
 });
 
