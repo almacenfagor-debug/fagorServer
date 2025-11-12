@@ -31,7 +31,7 @@ static async accessRequest(newRequest) {
         }
         //const newUser = await authorizationRequestModel.create(newAccess)
         
-    const employee = await authorizationRequestModel.findOne({
+   /* const employee = await authorizationRequestModel.findOne({
   where: { employeeId: getEmployeeDates.employeeId },
   include: [
     {
@@ -39,7 +39,7 @@ static async accessRequest(newRequest) {
       attributes: ["employeeName", "employeeLastName"],
     },
   ],
-});
+});*/
 
 
 const mailOptions = {
