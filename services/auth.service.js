@@ -52,7 +52,6 @@ if (!getEmployeeDates) {
 });*/
 
 
-
 await resend.emails.send({
   from: "Almacén Fagor <almacenfagor@resend.dev>",
   to: "japay01@hotmail.com",
@@ -60,7 +59,7 @@ await resend.emails.send({
   html: `
     <h3>Se ha recibido una nueva solicitud de acceso :</h3>
     <p><strong>Nombre:</strong> ${getEmployeeDates.employeeName}</p>
-    <p><strong>Apellido:</strong> ${getEmployeeDates.employeeLastName}</p>
+    <p><strong>Apellido:</strong> ${getEmployeeDates.lastName}</p>
     <p><strong>Documento:</strong> ${newRequest.documentId}</p>
     <p><strong>Cargo:</strong> ${newRequest.role}</p>
     <p><strong>Motivo:</strong> ${newRequest.reason}</p>
@@ -71,12 +70,8 @@ await resend.emails.send({
   `,
 });
 
+console.log("Correo enviado con Resend ✅");
 
-      console.log("Preparando envío de correo...");
-const info = await transporter.sendMail(mailOptions);
-console.log("Correo enviado: ", info);
-
-      console.log("Correo enviado: ", info.messageId);
 
     }
 
