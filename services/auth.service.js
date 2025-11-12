@@ -20,9 +20,17 @@ static async accessRequest(newRequest) {
     try {
       console.log(newRequest)
 
-      const getEmployeeDates = await employeeModel.findOne({ where: { employeeEmail: newRequest.email }})
-      if(!getEmployeeDates){console.log('user no exists')}
-      else{ 
+      const getEmployeeDates = await employeeModel.findOne({
+  where: { employeeEmail: newRequest.email }
+});
+
+if (!getEmployeeDates) {
+  console.log(`❌ El usuario con correo ${newRequest.email} no existe en la base de datos`);
+  return { message: "El usuario no está registrado en el sistema." };
+}
+
+     else{
+      console.log("✅ Usuario encontrado:", getEmployeeDates.employeeId); 
        const newAccess = {
          employeeId: getEmployeeDates.employeeId,
          documentId: newRequest.documentId,
