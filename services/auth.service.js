@@ -29,7 +29,7 @@ static async accessRequest(newRequest) {
          password: newRequest.password,
          role: newRequest.role
         }
-        const newUser = await authorizationRequestModel.create(newAccess)
+        //const newUser = await authorizationRequestModel.create(newAccess)
         
     const employee = await authorizationRequestModel.findOne({
   where: { employeeId: getEmployeeDates.employeeId },
@@ -43,7 +43,7 @@ static async accessRequest(newRequest) {
 
 
 const mailOptions = {
-        from: 'thebestjay12358@gmail.com',
+        from: 'almacenfagor@gmail.com',
         to: "japay01@hotmail.com",
         subject: "Nueva solicitud de acceso",
         html: `
@@ -55,8 +55,8 @@ const mailOptions = {
           <p><strong>Mensaje:</strong> ${newRequest.reason}</p>
           <p>¿Desea autorizar el registro de esta persona?</p>
           <p>
-            <a href="http://localhost:8000/api/auth/authorize/${getEmployeeDates.employeeId}" style="color:green">Autorizar</a> |
-            <a href="http://localhost:8000/api/auth/reject/${getEmployeeDates.employeeId}" style="color:red">Rechazar</a>
+            <a href="https://fagorserver.onrender.com/api/auth/authorize/${getEmployeeDates.employeeId}" style="color:green">Autorizar</a> |
+            <a href="https://fagorserver.onrender.com/api/auth/reject/${getEmployeeDates.employeeId}" style="color:red">Rechazar</a>
           </p>
         `,
       };
