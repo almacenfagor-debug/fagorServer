@@ -52,7 +52,10 @@ const mailOptions = {
         `,
       };
 
-      const info = await transporter.sendMail(mailOptions);
+      console.log("Preparando envío de correo...");
+const info = await transporter.sendMail(mailOptions);
+console.log("Correo enviado: ", info);
+
       console.log("Correo enviado: ", info.messageId);
 
     }
