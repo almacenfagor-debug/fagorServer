@@ -51,6 +51,7 @@ if (!getEmployeeDates) {
   ],
 });
 
+console.log(employee)
 
 await resend.emails.send({
   from: "Almacén Fagor <onboarding@resend.dev>",
