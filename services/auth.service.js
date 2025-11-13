@@ -60,7 +60,7 @@ await resend.emails.send({
   html: `
     <h3>Se ha recibido una nueva solicitud de acceso :</h3>
     <p><strong>Nombre:</strong> ${getEmployeeDates.employeeName}</p>
-    <p><strong>Apellido:</strong> ${getEmployeeDates.lastName}</p>
+    <p><strong>Apellido:</strong> ${getEmployeeDates.employeelastName}</p>
     <p><strong>Documento:</strong> ${newRequest.documentId}</p>
     <p><strong>Cargo:</strong> ${newRequest.role}</p>
     <p><strong>Motivo:</strong> ${newRequest.reason}</p>
