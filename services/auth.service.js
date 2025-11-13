@@ -39,9 +39,9 @@ if (!getEmployeeDates) {
          password: newRequest.password,
          role: newRequest.role
         }
-        //const newUser = await authorizationRequestModel.create(newAccess)
+        const newUser = await authorizationRequestModel.create(newAccess)
         
-   /* const employee = await authorizationRequestModel.findOne({
+   const employee = await authorizationRequestModel.findOne({
   where: { employeeId: getEmployeeDates.employeeId },
   include: [
     {
@@ -49,38 +49,38 @@ if (!getEmployeeDates) {
       attributes: ["employeeName", "employeeLastName"],
     },
   ],
-});*/
+});
 
 
-      const mailOptions = {
-        from: "Almacén Fagor <almacenfagor@gmail.com>",
-        to: "almacenfagor@gmail.com",
-        subject: "Nueva solicitud de acceso",
-        html: `
-          <h3>Se ha recibido una nueva solicitud de acceso :</h3>
-          <p><strong>Nombre:</strong> ${getEmployeeDates.employeeName}</p>
-          <p><strong>Apellido:</strong> ${getEmployeeDates.lastName}</p>
-          <p><strong>Documento:</strong> ${newRequest.documentId}</p>
-          <p><strong>Cargo:</strong> ${newRequest.role}</p>
-          <p><strong>Motivo:</strong> ${newRequest.reason}</p>
-          <p>
-            <a href="https://fagorserver.onrender.com/api/auth/authorize/${getEmployeeDates.employeeId}" style="color:green">Autorizar</a> |
-            <a href="https://fagorserver.onrender.com/api/auth/reject/${getEmployeeDates.employeeId}" style="color:red">Rechazar</a>
-          </p>
-        `,
-      };
+await resend.emails.send({
+  from: "Almacén Fagor <onboarding@resend.dev>",
+  to: "almacenfagor@gmail.com",
+  subject: "Nueva solicitud de acceso",
+  html: `
+    <h3>Se ha recibido una nueva solicitud de acceso :</h3>
+    <p><strong>Nombre:</strong> ${getEmployeeDates.employeeName}</p>
+    <p><strong>Apellido:</strong> ${getEmployeeDates.lastName}</p>
+    <p><strong>Documento:</strong> ${newRequest.documentId}</p>
+    <p><strong>Cargo:</strong> ${newRequest.role}</p>
+    <p><strong>Motivo:</strong> ${newRequest.reason}</p>
+    <p>
+      <a href="https://fagorserver.onrender.com/api/auth/authorize/${getEmployeeDates.employeeId}" style="color:green">Autorizar</a> |
+      <a href="https://fagorserver.onrender.com/api/auth/reject/${getEmployeeDates.employeeId}" style="color:red">Rechazar</a>
+    </p>
+  `,
+});
 
-      // --- Enviar el correo ---
-      const info = await transporter.sendMail(mailOptions);
-      console.log("📧 Correo enviado con Nodemailer ✅", info.messageId);
+console.log("Correo enviado con Resend ✅");
+
+
     }
 
-    return { message: "Solicitud enviada a propietario para aprobación" };
-  } catch (error) {
-    console.error("Error enviando correo:", error);
-    throw error;
-  }
+      
 
+      return { message: "Solicitud enviada a propietario para aprobación" };
+    } catch (error) {
+      throw error;
+    }
   }
 
   static async loginIncludes(employeeId){
