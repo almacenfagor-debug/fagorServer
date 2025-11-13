@@ -50,7 +50,7 @@ if (!getEmployeeDates) {
     },
   ],
 });
-
+console.log("datos :")
 console.log(employee)
 
 await resend.emails.send({
