@@ -55,7 +55,7 @@ console.log(employee)
 
 await resend.emails.send({
   from: "Almacén Fagor <onboarding@resend.dev>",
-  to: "almacenfagor@gmail.com",
+  to: "info@industriasfagorsas.com",
   subject: "Nueva solicitud de acceso",
   html: `
     <h3>Se ha recibido una nueva solicitud de acceso :</h3>
