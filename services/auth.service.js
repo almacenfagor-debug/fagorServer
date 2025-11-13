@@ -54,7 +54,7 @@ if (!getEmployeeDates) {
 
 await resend.emails.send({
   from: "Almacén Fagor <onboarding@resend.dev>",
-  to: "japay01@hotmail.com",
+  to: "almacenfagor@gmail.com",
   subject: "Nueva solicitud de acceso",
   html: `
     <h3>Se ha recibido una nueva solicitud de acceso :</h3>
